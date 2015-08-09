@@ -1,4 +1,4 @@
-# dokku nginx caching for vanilla/mainline dokku
+# nginx caching for vanilla/mainline dokku
 ===================
 
 This is a tweak of @rummnik's `dokku-alt` plugin to work on vanilla `dokku` (tested with 0.3.22)
