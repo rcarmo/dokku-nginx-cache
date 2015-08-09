@@ -1,21 +1,17 @@
- Dokku Nginx Cache [![Donations][]][gratipay]
+# dokku nginx caching for vanilla/mainline dokku
 ===================
-Wire in Nginx's proxy cache directives.
 
-Tested with [Dokku-alt][].  Your milage may vary on vanilla Dokku.
-
-[Donations]: http://img.shields.io/gratipay/rummik.png
-[gratipay]: https://www.gittip.com/rummik/
-[Dokku-alt]: https://github.com/dokku-alt/dokku-alt
-
+This is a tweak of @rummnik's `dokku-alt` plugin to work on vanilla `dokku` (tested with 0.3.22)
 
 ### Installing
 ```
-$ cd /var/lib/dokku-alt
-$ git clone https://github.com/rummik/dokku-nginx-cache.git
+$ cd /var/lib/dokku/plugins
+$ git clone https://github.com/rummik/dokku-nginx-cache.git nginx-cache
+$ dokku plugins-install
 ```
 
 ### Quick start
+
 Enable nginx request caching
 ```
 $ dokku nginx:cache:enable my-app
@@ -27,10 +23,10 @@ $ dokku nginx:cache:disable my-app
 ```
 
 ### Configuration
-Currently there are no configuration options.  However, Nginx does obey a
-number of caching- and `X-Accel-*`-related headers.
 
-Snippet from the [Nginx docs][]:
+There are no configuration options (other than tweaking the `nginx-pre-reload` hook). And since `nginx` caches entire raw requests on disk, there might be some interesting behavior if you're used to Varnish.
+
+`nginx` does, however, obey a number of caching- and `X-Accel-*`-related headers you can set in your app:
 
 - `X-Accel-Expires`, `Expires`, `Cache-Control`, `Set-Cookie`, and `Vary` set
   the parameters of response [caching][];
