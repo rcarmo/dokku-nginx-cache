@@ -16,7 +16,7 @@ case "$1" in
 		mkdir -p $CACHE_DIR
 		echo Enabled Nginx proxy cache for $APP
 
-		redeploy_app "$APP"
+		dokku ps:restart "$APP"
 		;;
 
 	nginx:cache:disable)
@@ -26,7 +26,7 @@ case "$1" in
 		rm -rf $DOKKU_ROOT/$APP/NGINX_CACHE
 		echo Disabled Nginx proxy cache for $APP
 
-		redeploy_app "$APP"
+		dokku ps:restart "$APP"
 		;;
 
 	help | nginx:help | nginx:cache:help)
